@@ -5,6 +5,7 @@ import {
   Product,
   UpdateProductDTO,
 } from '../models/product.model';
+import { retry } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -19,14 +20,14 @@ export class ProductsService {
       params = params.set('limit', limit);
       params = params.set('offset', offset);
     }
-    return this.http.get<Product[]>(this.apiUrl, { params });
+    return this.http.get<Product[]>(this.apiUrl, { params }).pipe(retry(3));
   }
 
   getProduct(id: string) {
     return this.http.get<Product>(`${this.apiUrl}/${id}`);
   }
 
-  getProductsByPagey(limit: number, offset: number) {
+  getProductsByPage(limit: number, offset: number) {
     return this.http.get<Product[]>(`${this.apiUrl}`, {
       params: { limit, offset },
     });

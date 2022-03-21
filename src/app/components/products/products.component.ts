@@ -42,7 +42,7 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.productsService
-      .getProductsByPagey(this.limit, this.offset)
+      .getAllProducts(this.limit, this.offset)
       .subscribe((data) => {
         this.products = data;
       });
@@ -110,7 +110,7 @@ export class ProductsComponent implements OnInit {
 
   loadMore() {
     this.productsService
-      .getProductsByPagey(this.limit, this.offset)
+      .getAllProducts(this.limit, this.offset)
       .subscribe((data) => {
         this.products = this.products.concat(data);
         this.offset += this.limit;
