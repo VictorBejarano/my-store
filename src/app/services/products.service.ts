@@ -11,7 +11,7 @@ import { retry } from 'rxjs';
   providedIn: 'root',
 })
 export class ProductsService {
-  private apiUrl = 'https://young-sands-07814.herokuapp.com/api/products';
+  private apiUrl = '/api/products';
   constructor(private http: HttpClient) {}
 
   getAllProducts(limit?: number, offset?: number) {
