@@ -11,13 +11,13 @@ export class ProductComponent {
   @Input() product: Product = {
     id: '',
     price: 0,
-    image: '',
+    images: [],
     title: '',
     description: '',
-    category: '',
-    rating: {
-      rate: 0,
-      count: 0,
+    category: {
+      id: '',
+      name: '',
+      typeImg: '',
     },
   };
 
