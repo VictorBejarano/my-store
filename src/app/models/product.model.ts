@@ -5,6 +5,7 @@ export interface Product {
   description: string;
   category: Category;
   images: string[];
+  taxes?: number;
 }
 
 export interface Category {
