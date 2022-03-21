@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ProductsService } from 'src/app/services/products.service';
 import { StoreService } from 'src/app/services/store.service';
 
-import { CreateProductDTO, Product, UpdateProductDTO } from '../../models/product.model';
+import {
+  CreateProductDTO,
+  Product,
+  UpdateProductDTO,
+} from '../../models/product.model';
 
 @Component({
   selector: 'app-products',
@@ -26,6 +30,8 @@ export class ProductsComponent implements OnInit {
       typeImg: '',
     },
   };
+  limit = 10;
+  offset = 0;
 
   constructor(
     private storeService: StoreService,
@@ -35,9 +41,11 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.productsService.getAllProducts().subscribe((data) => {
-      this.products = data;
-    });
+    this.productsService
+      .getProductsByPagey(this.limit, this.offset)
+      .subscribe((data) => {
+        this.products = data;
+      });
   }
 
   onAddToShoppingCart(product: Product) {
@@ -98,5 +106,14 @@ export class ProductsComponent implements OnInit {
       });
       this.showProductDetail = false;
     });
+  }
+
+  loadMore() {
+    this.productsService
+      .getProductsByPagey(this.limit, this.offset)
+      .subscribe((data) => {
+        this.products = this.products.concat(data);
+        this.offset += this.limit;
+      });
   }
 }
