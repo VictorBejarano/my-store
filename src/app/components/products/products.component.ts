@@ -89,4 +89,14 @@ export class ProductsComponent implements OnInit {
       });
     });
   }
+
+  deleteProduct() {
+    const id = this.productChosen.id;
+    this.productsService.delete(id).subscribe(() => {
+      this.products = this.products.filter((product) => {
+        return product.id !== id;
+      });
+      this.showProductDetail = false;
+    });
+  }
 }
