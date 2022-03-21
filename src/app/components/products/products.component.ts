@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductsService } from 'src/app/services/products.service';
 import { StoreService } from 'src/app/services/store.service';
 
-import { CreateProductDTO, Product } from '../../models/product.model';
+import { CreateProductDTO, Product, UpdateProductDTO } from '../../models/product.model';
 
 @Component({
   selector: 'app-products',
@@ -67,6 +67,26 @@ export class ProductsComponent implements OnInit {
     this.productsService.create(product).subscribe((data) => {
       console.log('CREATEd', data);
       this.products.unshift(data);
+    });
+  }
+
+  updateProduct() {
+    const changes: UpdateProductDTO = {
+      title: 'Nuevo titulo',
+      description: 'Descripción del producto',
+      images: ['https://via.placeholder.com/200'],
+      price: 1000,
+      categoryId: 1,
+    };
+    const id = this.productChosen.id;
+    this.productsService.update(id, changes).subscribe((data) => {
+      console.log('UPDATEd', data);
+      this.products = this.products.map((product) => {
+        if (product.id === id) {
+          return data;
+        }
+        return product;
+      });
     });
   }
 }

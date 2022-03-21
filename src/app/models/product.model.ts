@@ -7,12 +7,16 @@ export interface Product {
   images: string[];
 }
 
-export interface CreateProductDTO extends Omit<Product, 'id' | 'category'> {
-  categoryId: number;
-}
-
 export interface Category {
   id: string;
   name: string;
   typeImg: string;
+}
+
+export interface CreateProductDTO extends Omit<Product, 'id' | 'category'> {
+  categoryId: number;
+}
+
+export interface UpdateProductDTO extends Partial<CreateProductDTO> {
+  // Partial hace todos los campos opcionales
 }
