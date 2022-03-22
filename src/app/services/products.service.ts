@@ -4,10 +4,8 @@ import { retry, catchError, map } from 'rxjs/operators';
 import { throwError, zip } from 'rxjs';
 
 import { Product, CreateProductDTO, UpdateProductDTO } from './../models/product.model';
-
+import { checkTime } from './../interceptors/time.interceptor';
 import { environment } from './../../environments/environment';
-import { getTime } from 'date-fns';
-import { checkTime } from '../interceptors/time.interceptor';
 
 @Injectable({
   providedIn: 'root'
