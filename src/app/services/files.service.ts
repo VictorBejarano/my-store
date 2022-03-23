@@ -4,12 +4,7 @@ import { saveAs } from 'file-saver';
 import { tap, map } from 'rxjs/operators';
 
 import { environment } from './../../environments/environment';
-
-interface File {
-  originalname: string;
-  filename: string;
-  location: string;
-}
+import { FileRta } from './../models/files.model';
 
 @Injectable({
   providedIn: 'root'
@@ -36,10 +31,6 @@ export class FilesService {
   uploadFile(file: Blob) {
     const dto = new FormData();
     dto.append('file', file);
-    return this.http.post<File>(`${this.apiUrl}/upload`, dto, {
-      // headers: {
-      //   'Content-type': "multipart/form-data"
-      // }
-    })
+    return this.http.post<FileRta>(`${this.apiUrl}/upload`, dto)
   }
 }

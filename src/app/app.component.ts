@@ -9,26 +9,12 @@ import { FilesService } from './services/files.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  imgParent = '';
-  showImg = true;
-  token = '';
   imgRta = '';
 
   constructor(
     private usersService: UsersService,
     private filesService: FilesService
-  ) {
-
-  }
-
-
-  onLoaded(img: string) {
-    console.log('log padre', img);
-  }
-
-  toggleImg() {
-    this.showImg = !this.showImg;
-  }
+  ) {}
 
   createUser() {
     this.usersService.create({
