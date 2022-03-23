@@ -10,15 +10,25 @@ const routes: Routes = [
     path: '',
     component: LayoutComponent,
     children: [
-      { path: '', redirectTo: 'grid', pathMatch: 'full' },
-      { path: 'grid', component: GridComponent },
-      { path: 'task', component: TasksComponent },
-    ],
-  },
+      {
+        path: '',
+        redirectTo: 'grid',
+        pathMatch: 'full'
+      },
+      {
+        path: 'grid',
+        component: GridComponent
+      },
+      {
+        path: 'tasks',
+        component: TasksComponent
+      }
+    ]
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
-export class CmsRoutingModule {}
+export class CmsRoutingModule { }
