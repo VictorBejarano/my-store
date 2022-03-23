@@ -12,8 +12,6 @@ import { RecoveryComponent } from './website/pages/recovery/recovery.component';
 import { ProfileComponent } from './website/pages/profile/profile.component';
 import { ProductDetailComponent } from './website/pages/product-detail/product-detail.component';
 
-
-
 const routes: Routes = [
   {
     path: '',
@@ -22,19 +20,19 @@ const routes: Routes = [
       {
         path: '',
         redirectTo: '/home',
-        pathMatch: 'full'
+        pathMatch: 'full',
       },
       {
         path: 'home',
-        component: HomeComponent
+        component: HomeComponent,
       },
       {
         path: 'category/:id',
-        component: CategoryComponent
+        component: CategoryComponent,
       },
       {
         path: 'product/:id',
-        component: ProductDetailComponent
+        component: ProductDetailComponent,
       },
       {
         path: 'my-cart',
@@ -56,16 +54,20 @@ const routes: Routes = [
         path: 'profile',
         component: ProfileComponent,
       },
-    ]
+    ],
+  },
+  {
+    path: 'cms',
+    loadChildren: () => import('./cms/cms.module').then((m) => m.CmsModule),
   },
   {
     path: '**',
-    component: NotFoundComponent
-  }
+    component: NotFoundComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
