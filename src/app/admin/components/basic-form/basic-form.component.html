@@ -1,38 +1,81 @@
 <form [formGroup]="form" (ngSubmit)="save()">
-  <p>
-    Name: {{ nameField.valid }}
-    <input
-      [class.is-valid]="isNameFieldValid"
-      [class.is-invalid]="isNameFieldInvalid"
-      type="text"
-      formControlName="name"
-    />
-    <button [disabled]="nameField.invalid" (click)="getNameValue()">
-      Get Value
-    </button>
-    <!-- <code>
-      <pre>
-        {{ nameField | json }}
-      </pre>
-    </code> -->
-  </p>
+  <div formGroupName="fullname">
+    <p>
+      Name: {{ nameField.valid }}
+      <input
+        [class.is-valid]="isNameFieldValid"
+        [class.is-invalid]="isNameFieldInvalid"
+        type="text"
+        formControlName="name"
+      />
+      <button [disabled]="nameField.invalid" (click)="getNameValue()">
+        Get Value
+      </button>
+      <!-- <code>
+        <pre>
+          {{ nameField | json }}
+        </pre>
+      </code> -->
+    </p>
 
-  <div class="messages" [class.active]="nameField.touched && nameField.invalid">
+    <div
+      class="messages"
+      [class.active]="nameField.touched && nameField.invalid"
+    >
+      <p>
+        <strong *ngIf="nameField.hasError('required')"
+          >Este campo es requerido</strong
+        >
+      </p>
+      <p>
+        <strong *ngIf="nameField.hasError('maxlength')"
+          >Debe tener maximo 10 caracteres</strong
+        >
+      </p>
+      <p>
+        <strong *ngIf="nameField.hasError('pattern')"
+          >No debe tener caracteres</strong
+        >
+      </p>
+    </div>
     <p>
-      <strong *ngIf="nameField.hasError('required')"
-        >Este campo es requerido</strong
-      >
+      Name: {{ lastField.valid }}
+      <input
+        [class.is-valid]="isNameFieldValid"
+        [class.is-invalid]="isNameFieldInvalid"
+        type="text"
+        formControlName="last"
+      />
+      <button [disabled]="lastField.invalid" (click)="getNameValue()">
+        Get Value
+      </button>
+      <!-- <code>
+        <pre>
+          {{ nameField | json }}
+        </pre>
+      </code> -->
     </p>
-    <p>
-      <strong *ngIf="nameField.hasError('maxlength')"
-        >Debe tener maximo 10 caracteres</strong
-      >
-    </p>
-    <p>
-      <strong *ngIf="nameField.hasError('pattern')"
-        >No debe tener caracteres</strong
-      >
-    </p>
+
+    <div
+      class="messages"
+      [class.active]="lastField.touched && lastField.invalid"
+    >
+      <p>
+        <strong *ngIf="lastField.hasError('required')"
+          >Este campo es requerido</strong
+        >
+      </p>
+      <p>
+        <strong *ngIf="lastField.hasError('maxlength')"
+          >Debe tener maximo 10 caracteres</strong
+        >
+      </p>
+      <p>
+        <strong *ngIf="lastField.hasError('pattern')"
+          >No debe tener caracteres</strong
+        >
+      </p>
+    </div>
   </div>
 
   <p>
