@@ -7,7 +7,12 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./basic-form.component.scss'],
 })
 export class BasicFormComponent implements OnInit {
-  nameField = new FormControl('Soy un control');
+  nameField = new FormControl('');
+  emailField = new FormControl('');
+  phoneField = new FormControl('');
+  colorField = new FormControl('');
+  dateField = new FormControl('');
+  ageField = new FormControl('');
   constructor() {}
 
   ngOnInit(): void {
