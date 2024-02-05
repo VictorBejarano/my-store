@@ -1,13 +1,25 @@
 <p>
-  Name: {{ nameField.value }}
+  Name: {{ nameField.value }} {{ nameField.valid }}
   <input type="text" [formControl]="nameField" />
-  <button (click)="getNameValue()">Get Value</button>
+  <button [disabled]="nameField.invalid" (click)="getNameValue()">
+    Get Value
+  </button>
   <!-- <code>
     <pre>
       {{ nameField | json }}
     </pre>
   </code> -->
 </p>
+
+<p>
+  <strong *ngIf="nameField.touched && nameField.hasError('required')"
+    >Este campo es requerido</strong
+  >
+  <strong *ngIf="nameField.touched && nameField.hasError('maxlength')"
+    >Debe tener maximo 10 caracteres</strong
+  >
+</p>
+
 <p>
   Email: {{ emailField.value }}
   <input type="email" [formControl]="emailField" />
@@ -57,15 +69,30 @@
 <p>
   Gender: {{ genderField.value }}
   <label>
-    <input name="gender" type="radio" value="male" [formControl]="genderField" />
+    <input
+      name="gender"
+      type="radio"
+      value="male"
+      [formControl]="genderField"
+    />
     Male
   </label>
   <label>
-    <input name="gender" type="radio" value="female" [formControl]="genderField" />
+    <input
+      name="gender"
+      type="radio"
+      value="female"
+      [formControl]="genderField"
+    />
     Female
   </label>
   <label>
-    <input name="gender" type="radio" value="other" [formControl]="genderField" />
+    <input
+      name="gender"
+      type="radio"
+      value="other"
+      [formControl]="genderField"
+    />
     Other
   </label>
 </p>
