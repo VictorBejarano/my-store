@@ -38,6 +38,16 @@
     Phone: {{ phoneField.value }}
     <input type="tel" formControlName="phone" />
   </p>
+  <div
+    class="messages"
+    [class.active]="phoneField.touched && phoneField.invalid"
+  >
+    <p>
+      <strong *ngIf="phoneField.touched && phoneField.hasError('required')"
+        >Este campo es requerido</strong
+      >
+    </p>
+  </div>
   <p>
     Color: {{ colorField.value }}
     <input type="color" formControlName="color" />
@@ -118,6 +128,6 @@
     </label>
   </p>
   <p>
-    <button type="submit">Enviar</button>
+    <button [disabled]="form.invalid" type="submit">Enviar</button>
   </p>
 </form>
