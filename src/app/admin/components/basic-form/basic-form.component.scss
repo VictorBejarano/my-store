@@ -13,3 +13,9 @@ input {
     opacity: 1;
   }
 }
+
+form {
+  mat-form-field {
+    width: 100%;
+  }
+}
