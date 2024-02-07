@@ -19,7 +19,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatStepperModule } from '@angular/material/stepper';
-import { MatDatepickerModule } from '@angular/material/datepicker';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
@@ -45,7 +45,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatFormFieldModule,
     MatStepperModule,
     MatDatepickerModule,
-    MatNativeDateModule,
+    MatNativeDateModule
   ],
   exports: [
     MatButtonModule,
@@ -67,7 +67,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatFormFieldModule,
     MatStepperModule,
     MatDatepickerModule,
-    MatNativeDateModule,
-  ],
+    MatNativeDateModule
+  ]
 })
-export class MaterialModule {}
+export class MaterialModule { }

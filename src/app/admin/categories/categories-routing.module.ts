@@ -5,7 +5,6 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { CategoryFormComponent } from './components/category-form/category-form.component';
 import { CategoryComponent } from './containers/category/category.component';
 
-
 const routes: Routes = [
   {
     path: '',

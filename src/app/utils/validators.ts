@@ -3,11 +3,12 @@ import { map } from 'rxjs/operators';
 import { CategoriesService } from './../core/services/categories.service';
 
 export class MyValidators {
+
   static isPriceValid(control: AbstractControl) {
     const value = control.value;
     console.log(value);
     if (value > 10000) {
-      return { price_invalid: true };
+      return {price_invalid: true};
     }
     return null;
   }
@@ -15,7 +16,7 @@ export class MyValidators {
   static validPassword(control: AbstractControl) {
     const value = control.value;
     if (!containsNumber(value)) {
-      return { invalid_password: true };
+      return {invalid_password: true};
     }
     return null;
   }
@@ -24,7 +25,7 @@ export class MyValidators {
     const password = control.get('password').value;
     const confirmPassword = control.get('confirmPassword').value;
     if (password !== confirmPassword) {
-      return { match_password: true };
+      return {match_password: true};
     }
     return null;
   }
@@ -32,23 +33,26 @@ export class MyValidators {
   static validateCategory(service: CategoriesService) {
     return (control: AbstractControl) => {
       const value = control.value;
-      return service.checkCategory(value).pipe(
+      return service.checkCategory(value)
+      .pipe(
         map((response: any) => {
           const isAvailable = response.isAvailable;
           if (!isAvailable) {
-            return { not_available: true };
+            return {not_available: true};
           }
           return null;
         })
       );
     };
   }
+
 }
 
-function containsNumber(value: string) {
-  return value.split('').find((v) => isNumber(v)) !== undefined;
+function containsNumber(value: string){
+  return value.split('').find(v => isNumber(v)) !== undefined;
 }
 
-function isNumber(value: string) {
+
+function isNumber(value: string){
   return !isNaN(parseInt(value, 10));
 }

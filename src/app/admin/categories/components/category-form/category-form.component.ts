@@ -1,19 +1,21 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
 import { MyValidators } from './../../../../utils/validators';
-import { Category } from 'src/app/core/models/category.model';
-import { CategoriesService } from 'src/app/core/services/categories.service';
+import { Category } from './../../../../core/models/category.model';
+
+import { CategoriesService } from './../../../../core/services/categories.service';
 
 @Component({
   selector: 'app-category-form',
   templateUrl: './category-form.component.html',
-  styleUrls: ['./category-form.component.scss'],
+  styleUrls: ['./category-form.component.scss']
 })
-export class CategoryFormComponent {
+export class CategoryFormComponent implements OnInit {
+
   form: FormGroup;
   image$: Observable<string>;
   isNew = true;
@@ -25,26 +27,24 @@ export class CategoryFormComponent {
       this.form.patchValue(data);
     }
   }
-
   @Output() create = new EventEmitter();
   @Output() update = new EventEmitter();
 
   constructor(
     private formBuilder: FormBuilder,
     private storage: AngularFireStorage,
-    private categoriesService: CategoriesService
+    private categoriesService: CategoriesService,
   ) {
     this.buildForm();
   }
 
+  ngOnInit(): void {
+  }
+
   private buildForm() {
     this.form = this.formBuilder.group({
-      name: [
-        '',
-        [Validators.required, Validators.minLength(4)],
-        MyValidators.validateCategory(this.categoriesService),
-      ],
-      image: ['', Validators.required],
+      name: ['', [Validators.required, Validators.minLength(4)], MyValidators.validateCategory(this.categoriesService)],
+      image: ['', Validators.required]
     });
   }
 
@@ -74,17 +74,17 @@ export class CategoryFormComponent {
     const ref = this.storage.ref(name);
     const task = this.storage.upload(name, image);
 
-    task
-      .snapshotChanges()
-      .pipe(
-        finalize(() => {
-          this.image$ = ref.getDownloadURL();
-          this.image$.subscribe((url) => {
-            console.log(url);
-            this.imageField.setValue(url);
-          });
-        })
-      )
-      .subscribe();
+    task.snapshotChanges()
+    .pipe(
+      finalize(() => {
+        this.image$ = ref.getDownloadURL();
+        this.image$.subscribe(url => {
+          console.log(url);
+          this.imageField.setValue(url);
+        });
+      })
+    )
+    .subscribe();
   }
+
 }
