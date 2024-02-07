@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoriesService } from './../../../../core/services/categories.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { Category } from 'src/app/core/models/category.model';
+
+import { CategoriesService } from './../../../../core/services/categories.service';
+import { Category } from './../../../../core/models/category.model';
 
 @Component({
   selector: 'app-category',
@@ -39,7 +40,7 @@ export class CategoryComponent implements OnInit {
       });
   }
 
-  getCategory(id: string) {
+  private getCategory(id: string) {
     this.categoriesService.getCategory(id).subscribe((data) => {
       this.category = data;
     });
