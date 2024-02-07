@@ -55,7 +55,6 @@ export class RegisterComponent implements OnInit {
     );
 
     this.typeField.valueChanges.subscribe((value) => {
-      console.log(value);
       if (value === 'company') {
         this.companyNameField.setValidators([Validators.required]);
       } else {

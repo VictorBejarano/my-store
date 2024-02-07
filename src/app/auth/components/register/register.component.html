@@ -34,8 +34,9 @@
             >
               <mat-error
                 *ngIf="form.get('password').hasError('invalid_password')"
-                >Debe tener un numero</mat-error
               >
+                Debe tener un numero
+              </mat-error>
             </div>
           </mat-form-field>
         </div>
@@ -51,18 +52,18 @@
               type="password"
             />
             <div *ngIf="form.get('confirmPassword').touched && form.errors">
-              <mat-error *ngIf="form.hasError('match_password')"
-                >No son iguales</mat-error
-              >
+              <mat-error *ngIf="form.hasError('match_password')">
+                No hace match
+              </mat-error>
             </div>
           </mat-form-field>
         </div>
       </div>
       <div class="row">
         <div class="col-xs">
-          <mat-radio-group formControlName="type">
+          <mat-radio-group formControlName="type" aria-label="Select an option">
             <mat-radio-button value="company">Company</mat-radio-button>
-            <mat-radio-button value="customer">Customer</mat-radio-button>
+            <mat-radio-button value="user">User</mat-radio-button>
           </mat-radio-group>
         </div>
       </div>
@@ -71,7 +72,7 @@
           <mat-form-field>
             <mat-label>Company Name</mat-label>
             <input
-              placeholder="Company"
+              placeholder="email"
               formControlName="companyName"
               matInput
               type="text"

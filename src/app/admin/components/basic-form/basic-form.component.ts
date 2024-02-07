@@ -1,68 +1,56 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormControl,
-  Validators,
-  FormGroup,
-  FormBuilder,
-} from '@angular/forms';
+import { FormControl, Validators, FormGroup, FormBuilder, AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-basic-form',
   templateUrl: './basic-form.component.html',
-  styleUrls: ['./basic-form.component.scss'],
+  styleUrls: ['./basic-form.component.scss']
 })
 export class BasicFormComponent implements OnInit {
+
   form: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
-    this.buidForm();
+  constructor(
+    private formBuilder: FormBuilder
+  ) {
+    this.buildForm();
   }
 
   ngOnInit(): void {
-    // this.form.valueChanges.subscribe((value) => {
+    // this.nameField.valueChanges
+    // .subscribe(value => {
+    //   console.log(value);
+    // });
+    // this.form.valueChanges
+    // .subscribe(value => {
     //   console.log(value);
     // });
   }
 
   getNameValue() {
-    console.log('Este curso es increible');
+    console.log(this.nameField.value);
   }
 
-  save() {
-    if (this.form.valid) {
+  save(event) {
+    if (this.form.valid){
       console.log(this.form.value);
     } else {
       this.form.markAllAsTouched();
     }
   }
 
-  private buidForm() {
+  private buildForm() {
     this.form = this.formBuilder.group({
-      fullname: this.formBuilder.group({
-        name: [
-          '',
-          [
-            Validators.required,
-            Validators.maxLength(10),
-            Validators.pattern(/^([Aa-zA-ZáéíóúÁÉÍÓÚÑñ]{2,}\s?){2,4}$/),
-          ],
-        ],
-        last: [
-          '',
-          [
-            Validators.required,
-            Validators.maxLength(10),
-            Validators.pattern(/^([Aa-zA-ZáéíóúÁÉÍÓÚÑñ]{2,}\s?){2,4}$/),
-          ],
-        ],
+      fullName: this.formBuilder.group({
+        name: ['', [Validators.required, Validators.maxLength(10), Validators.pattern(/^[a-zA-Z ]+$/)]],
+        last: ['', [Validators.required, Validators.maxLength(10), Validators.pattern(/^[a-zA-Z ]+$/)]]
       }),
-
       email: ['', [Validators.required, Validators.email]],
       phone: ['', Validators.required],
       color: ['#000000'],
       date: [''],
-      age: [12, [Validators.required, Validators.min(18), Validators.max(100)]],
-      category: ['category-2'],
+      age: [18, [Validators.required, Validators.min(18), Validators.max(100)]],
+      category: [''],
       tag: [''],
       agree: [false, [Validators.requiredTrue]],
       gender: [''],
@@ -71,11 +59,19 @@ export class BasicFormComponent implements OnInit {
   }
 
   get nameField() {
-    return this.form.get('fullname.name');
+    return this.form.get('fullName.name');
   }
 
   get lastField() {
-    return this.form.get('fullname.last');
+    return this.form.get('fullName.last');
+  }
+
+  get isNameFieldValid() {
+    return this.nameField.touched && this.nameField.valid;
+  }
+
+  get isNameFieldInvalid() {
+    return this.nameField.touched && this.nameField.invalid;
   }
 
   get emailField() {
@@ -118,11 +114,4 @@ export class BasicFormComponent implements OnInit {
     return this.form.get('zone');
   }
 
-  get isNameFieldValid() {
-    return this.nameField.touched && this.nameField.valid;
-  }
-
-  get isNameFieldInvalid() {
-    return this.nameField.touched && this.nameField.invalid;
-  }
 }
