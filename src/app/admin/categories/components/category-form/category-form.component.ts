@@ -12,7 +12,11 @@ import { CategoriesService } from './../../../../core/services/categories.servic
 export class CategoryFormComponent implements OnInit {
   form: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private router: Router) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private categoriesService: CategoriesService,
+    private router: Router
+  ) {
     this.buildForm();
   }
 
@@ -31,5 +35,20 @@ export class CategoryFormComponent implements OnInit {
 
   get imageField() {
     return this.form.get('image');
+  }
+
+  save() {
+    if (this.form.valid) {
+      this.createCategory();
+    } else {
+      this.form.markAllAsTouched();
+    }
+  }
+
+  private createCategory() {
+    const data = this.form.value;
+    this.categoriesService.createCategory(data).subscribe((rta) => {
+      this.router.navigate(['/admin/categories']);
+    });
   }
 }
