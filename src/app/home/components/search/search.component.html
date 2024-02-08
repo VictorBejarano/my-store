@@ -2,3 +2,9 @@
   <input type="search" [formControl]="searchField" title="Input search" />
 </p>
 <p>{{ searchField.value }}</p>
+
+<div class="image-grid">
+  <div class="image" *ngFor="let result of result">
+    <img [src]="result.url" alt="" />
+  </div>
+</div>
