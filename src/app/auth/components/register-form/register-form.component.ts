@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { MyValidators } from './../../../utils/validators';
 
@@ -10,7 +11,7 @@ import { UsersService } from './../../../services/user.service';
   templateUrl: './register-form.component.html',
   styleUrls: ['./register-form.component.scss'],
 })
-export class RegisterFormComponent implements OnInit {
+export class RegisterFormComponent {
   form = this.fb.group(
     {
       name: ['', [Validators.required]],
@@ -27,10 +28,9 @@ export class RegisterFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private usersService: UsersService
+    private usersService: UsersService,
+    private router: Router
   ) {}
-
-  ngOnInit(): void {}
 
   register(event: Event) {
     event.preventDefault();
@@ -43,6 +43,7 @@ export class RegisterFormComponent implements OnInit {
           // redirect
           // alert
           this.status = 'success';
+          this.router.navigateByUrl('/login');
         },
         error: (error) => {
           // redict
