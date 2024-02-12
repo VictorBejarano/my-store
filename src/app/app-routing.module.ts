@@ -1,61 +1,35 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
-import { LayoutComponent } from './layout/layout.component';
-
-import { AdminGuard } from './admin.guard';
+import { PeopleComponent } from './components/people/people.component';
+import { PicoPreviewComponent } from './components/pico-preview/pico-preview.component';
+import { OthersComponent } from './components/others/others.component';
 
 const routes: Routes = [
   {
-    path: '',
-    component: LayoutComponent,
-    children: [
-      {
-        path: '',
-        redirectTo: '/home',
-        pathMatch: 'full',
-      },
-      {
-        path: 'home',
-        loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
-      },
-      {
-        path: 'products',
-        loadChildren: () => import('./product/product.module').then(m => m.ProductModule)
-      },
-      {
-        path: 'contact',
-        loadChildren: () => import('./contact/contact.module').then(m => m.ContactModule)
-      },
-      {
-        path: 'order',
-        loadChildren: () => import('./order/order.module').then(m => m.OrderModule)
-      },
-      {
-        path: 'demo',
-        loadChildren: () => import('./demo/demo.module').then(m => m.DemoModule)
-      },
-    ]
+    path: 'pico-preview',
+    component: PicoPreviewComponent
   },
   {
-    path: 'admin',
-    canActivate: [AdminGuard],
-    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
+    path: 'people',
+    component: PeopleComponent
+  },
+  {
+    path: 'others',
+    component: OthersComponent
   },
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
   },
   {
-    path: '**',
-    loadChildren: () => import('./page-not-found/page-not-found.module').then(m => m.PageNotFoundModule)
-  },
+    path: 'products',
+    loadChildren: () => import('./products/products.module').then(m => m.ProductsModule)
+  }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {
-    preloadingStrategy: PreloadAllModules
-  })],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
