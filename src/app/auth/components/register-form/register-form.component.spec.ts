@@ -186,7 +186,7 @@ fdescribe('RegisterFormComponent', () => {
     // Act
     fixture.detectChanges();
     // Assert
-    expect(component.emailField?.invalid).toBeTruthy();
+    expect(component.emailField?.invalid).toBeTrue();
     expect(userService.isAvailableByEmail).toHaveBeenCalledWith('nico@mail.com');
     // reto
     const errorMsg = getText(fixture, 'emailField-not-available');
